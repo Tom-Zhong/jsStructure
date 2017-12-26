@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>真假值</title>
+</head>
+
+<body>
+  <script>
+    function testTruthy(val) {
+      return val ? console.log('truthy') : console.log('falsy');
+    }
+
+    // Boolean
+    testTruthy(true);
+    testTruthy(false);
+    testTruthy(new Boolean(false));
+
+
+    testTruthy('');
+    testTruthy('Packet');
+    testTruthy(new String(''));
+
+    testTruthy(1);
+    testTruthy(-1);
+    testTruthy(NaN);
+    testTruthy(new Number(NaN));
+
+    testTruthy({});
+    testTruthy([]);
+
+    var obj = {
+      name: 'John'
+    };
+    testTruthy(obj);
+    testTruthy(obj.name);
+    testTruthy(obj.age);
+  </script>
+</body>
+
+</html>
