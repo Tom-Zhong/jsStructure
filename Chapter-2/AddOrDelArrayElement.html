@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>添加和删除元素</title>
+</head>
+
+<body>
+  <script>
+    // 初始化元素
+    var numbers = [];
+    for (let i = 0; i < 10; i++) {
+      numbers[i] = i;
+    }
+    console.log(numbers);
+
+    // 插入尾端最简单的方法
+    numbers[numbers.length] = 10;
+    console.log(numbers);
+
+    // 使用push方法插入尾端
+    numbers.push(11);
+    numbers.push(12, 13);
+    console.log(numbers);
+
+    // 插入头部最简单的方法
+    for (let i = numbers.length; i > 0; i--) {
+      numbers[i] = numbers[i - 1];
+    }
+    numbers[0] = -1;
+    console.log(numbers);
+
+    // 使用unshift插入头部
+    numbers.unshift(-2);
+    numbers.unshift(-4, -3);
+    console.log(numbers);
+
+    // 删除第一个元素
+    for (let i = 0; i < numbers.length; i++) {
+      numbers[i] = numbers[i + 1];
+    }
+    numbers.length--;
+    console.log(numbers);
+
+    // 使用shift删除
+    numbers.shift();
+    console.log(numbers)
+
+    // 使用splice添加和删除指定位置元素的元素
+    numbers.splice(5, 3);
+    console.log(numbers);
+
+    // 使用splice添加元素
+    numbers.splice(5, 0, 2, 3, 4);
+    console.log(numbers);
+
+    var numbers2 = [1, 2, 3];
+    // 自己实现splice
+    Array.prototype.splice2 = function() {
+      if (!arguments) {
+        console.log('请输入正确的参数');
+        return;
+      }
+      var startIndex = arguments[0];
+      var deleteEndIndex = arguments[1];
+      var insertArrayLength = arguments.length - 2;
+      if (startIndex < 0 || startIndex > this.length || deleteEndIndex < 0 || deleteEndIndex > this.length || (startIndex + deleteEndIndex) > this.length) {
+        console.log('非法输入');
+        return;
+      }
+      // 先删除指定元素
+      if (deleteEndIndex != 0) {
+        for (var i = startIndex; i < this.length; i++) {
+          this[i] = this[i + deleteEndIndex]
+        }
+        this.length = this.length - deleteEndIndex;
+      }
+
+      // 先让元素后移相应的位数
+      for (var i = this.length - 1; i >= startIndex; i--) {
+        this[i + insertArrayLength] = this[i];
+      }
+      // 在相应的位置添加相应的元素
+      for (var i = startIndex, j = 2; j < arguments.length; i++, j++) {
+        this[i] = arguments[j];
+      }
+      // 输出这个元素
+      // console.log(this);
+    }
+    numbers2.splice2(0, 0, 9, 99);
+    console.log(numbers2);
+  </script>
+</body>
+
+</html>
